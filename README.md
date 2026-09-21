@@ -23,12 +23,17 @@ data/
   cards.csv
   attributes.csv
 
+docs/
+  Card_Design.md
+
 index.html
 style.css
 app.js
 ```
 
 The CSV files are the source data. The static Viewer reads them directly.
+
+The current Card visual and interaction direction is documented in [Card Design v0.1](docs/Card_Design.md). The live Viewer is still the earlier v0.0 prototype; the design document intentionally comes before implementation.
 
 ## Philosophy
 
@@ -44,4 +49,4 @@ YDI Card was born from the private YDI (Yaegashi Digital Infrastructure) archite
 
 ## Status
 
-Experimental — v0.0.
+Experimental — v0.0 Viewer / v0.1 Card design direction.
