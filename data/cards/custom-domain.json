@@ -1,0 +1,18 @@
+{
+  "id": "custom-domain",
+  "number": 2,
+  "name": "Custom Domain",
+  "attribute": "naming",
+  "type": "domain",
+  "summary": "インターネット上のリソースを識別するために独自に取得・管理するドメイン名。",
+  "facts": {
+    "system": "Domain Name System (DNS)",
+    "example": "example.com"
+  },
+  "uses": [
+    "Web Address",
+    "Mail Address",
+    "Service Endpoint",
+    "Subdomain"
+  ]
+}
