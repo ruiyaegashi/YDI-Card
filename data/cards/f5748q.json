@@ -1,0 +1,20 @@
+{
+  "id": "f5748q",
+  "number": 1,
+  "name": "F5748Q",
+  "attribute": "network",
+  "type": "home-gateway",
+  "summary": "光回線向けホームゲートウェイ。",
+  "facts": {
+    "manufacturer": "ZTE Corporation",
+    "model": "F5748Q"
+  },
+  "capabilities": [
+    "XGS-PON",
+    "10GbE",
+    "Wi-Fi",
+    "VoIP",
+    "IPv6",
+    "Router"
+  ]
+}

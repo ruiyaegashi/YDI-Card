@@ -2,26 +2,35 @@
 
 > Things are shared. Architecture is personal.
 
-YDI Card is a small, open Card Library for describing the things that can compose a digital home.
+YDI Card is a small, open library of reusable knowledge about the things that can compose a digital home.
 
 A **Card** describes **what a thing is** using general, reusable information.
 
-A **Deck** describes **why that Card is here** in a particular home or system. Decks are intentionally outside this repository for now.
+An **Instance** identifies a specific real-world thing. Instance data is private by default and lives outside this public repository.
+
+A **Deck** composes Cards for a purpose. A Deck may be shared; private Instance bindings do not need to be part of its public representation.
 
 ## Model
 
-- **Card** — general information about a thing.
+- **Card** — shared knowledge / building block.
 - **Attribute** — a classification rule for Cards.
-- **Deck** — environment-specific responsibility, rationale, constraints, and relationships.
+- **Instance** — a private identification of a specific real-world thing.
+- **Deck** — an architecture composed from Cards, optionally bound to Instances in private contexts.
 
-YDI Card begins deliberately small. The first Card is **F5748Q**, classified with the **Network** Attribute.
+The first two Cards deliberately exercise different kinds of things:
+
+- **#0001 F5748Q** — a concrete product model, classified as **Network**.
+- **#0002 Custom Domain** — an abstract digital resource, classified provisionally as **Naming**.
 
 ## Repository
 
 ```text
 data/
-  cards.csv
-  attributes.csv
+  attributes.json
+  cards/
+    index.json
+    f5748q.json
+    custom-domain.json
 
 docs/
   Card_Design.md
@@ -31,9 +40,30 @@ style.css
 app.js
 ```
 
-The CSV files are the source data. The static Viewer reads them directly.
+Structured Card data is the canonical source. The Viewer is only one presentation of that data.
 
-The current Card visual and interaction direction is documented in [Card Design v0.1](docs/Card_Design.md). The live Viewer is still the earlier v0.0 prototype; the design document intentionally comes before implementation.
+The data model should not depend on a particular presentation. The same data may later feed a Card Viewer, list/table view, house view, encyclopedia, guidebook, API, or another application.
+
+## Data direction
+
+Card files currently keep only a small shared core and add knowledge that is meaningful for the thing being described.
+
+Typical shared fields:
+
+```text
+id
+number
+name
+attribute
+type
+summary
+```
+
+Thing-specific knowledge is allowed to differ. For example, a product may have a manufacturer and capabilities, while a Custom Domain may instead have uses and DNS-related facts.
+
+Presentation concepts such as front, back, flip animation, and layout are intentionally not part of the canonical data model.
+
+**Data knows meaning. Apps know presentation.**
 
 ## Philosophy
 
@@ -49,4 +79,4 @@ YDI Card was born from the private YDI (Yaegashi Digital Infrastructure) archite
 
 ## Status
 
-Experimental — v0.0 Viewer / v0.1 Card design direction.
+Experimental — structured data v0.1 / Card design v0.1. The live Viewer remains intentionally simple while the data model evolves.

@@ -1,31 +1,34 @@
-const parseCsv = (text) => {
-  const lines = text.trim().split(/\r?\n/);
-  const headers = lines.shift().split(",");
-  return lines.map(line => {
-    const values = line.split(",");
-    return Object.fromEntries(headers.map((key, i) => [key, values[i] ?? ""]));
-  });
-};
+const escapeHtml = value => String(value ?? "")
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
 
 Promise.all([
-  fetch("./data/cards.csv").then(r => r.text()),
-  fetch("./data/attributes.csv").then(r => r.text())
-]).then(([cardsText, attributesText]) => {
-  const cards = parseCsv(cardsText);
+  fetch("./data/cards/index.json").then(r => r.json()),
+  fetch("./data/attributes.json").then(r => r.json())
+]).then(async ([cardIds, attributeList]) => {
+  const cards = await Promise.all(
+    cardIds.map(id => fetch(`./data/cards/${id}.json`).then(r => r.json()))
+  );
   const attributes = Object.fromEntries(
-    parseCsv(attributesText).map(attribute => [attribute.id, attribute])
+    attributeList.map(attribute => [attribute.id, attribute])
   );
 
   document.querySelector("#cards").innerHTML = cards.map(card => {
     const attribute = attributes[card.attribute];
+    const manufacturer = card.facts?.manufacturer;
+
     return `
       <article class="card">
-        <span class="attribute">${attribute?.name ?? card.attribute}</span>
-        <h2>${card.name}</h2>
-        <p class="type">${card.type}</p>
-        <p class="summary">${card.summary}</p>
-        <p class="manufacturer">${card.manufacturer}</p>
-        <p class="card-id">${card.id}</p>
+        <span class="attribute">${escapeHtml(attribute?.name ?? card.attribute)}</span>
+        <span class="card-number">#${String(card.number).padStart(4, "0")}</span>
+        <h2>${escapeHtml(card.name)}</h2>
+        <p class="type">${escapeHtml(card.type)}</p>
+        <p class="summary">${escapeHtml(card.summary)}</p>
+        ${manufacturer ? `<p class="manufacturer">${escapeHtml(manufacturer)}</p>` : ""}
+        <p class="card-id">${escapeHtml(card.id)}</p>
       </article>
     `;
   }).join("");

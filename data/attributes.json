@@ -1,0 +1,12 @@
+[
+  {
+    "id": "network",
+    "name": "Network",
+    "description": "通信に関する領域"
+  },
+  {
+    "id": "naming",
+    "name": "Naming",
+    "description": "デジタル世界の名前付けに関する領域"
+  }
+]
