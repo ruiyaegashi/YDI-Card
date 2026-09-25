@@ -10,13 +10,23 @@ header { margin-bottom: 32px; }
 .eyebrow { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
 h1 { margin: 6px 0 8px; font-size: clamp(32px, 6vw, 56px); }
 .lead { margin-top: 0; opacity: .7; }
-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; align-items: start; }
 .card { min-height: 330px; padding: 22px; border: 1px solid #bdbdb7; border-radius: 18px; background: #fff; display: flex; flex-direction: column; }
 .attribute { align-self: flex-start; padding: 5px 9px; border: 1px solid currentColor; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .card h2 { margin: 28px 0 4px; font-size: 32px; }
 .type { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; }
 .summary { margin-top: 28px; line-height: 1.7; }
-.manufacturer { margin-top: auto; font-size: 13px; }
-.card-id { margin: 6px 0 0; font-size: 11px; opacity: .55; }
+.manufacturer { margin-top: 18px; font-size: 13px; }
+.knowledge { margin-top: auto; border-top: 1px solid #deded8; padding-top: 14px; }
+.knowledge summary { cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.knowledge-body { padding-top: 14px; display: grid; gap: 18px; }
+.knowledge-section h3 { margin: 0 0 8px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .6; }
+.facts { margin: 0; }
+.fact-row { display: grid; grid-template-columns: minmax(88px, .8fr) 1.2fr; gap: 10px; padding: 6px 0; border-bottom: 1px solid #ecece7; }
+.fact-row dt { font-size: 11px; opacity: .6; }
+.fact-row dd { margin: 0; font-size: 12px; overflow-wrap: anywhere; }
+.knowledge-list { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.knowledge-list li { padding: 5px 8px; border: 1px solid #d7d7d1; border-radius: 999px; font-size: 11px; }
+.card-id { margin: 14px 0 0; font-size: 11px; opacity: .55; }
 .message { margin-top: 20px; opacity: .65; }
 footer { margin-top: 48px; font-size: 12px; opacity: .5; }

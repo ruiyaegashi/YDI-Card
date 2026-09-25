@@ -5,6 +5,55 @@ const escapeHtml = value => String(value ?? "")
   .replaceAll('"', "&quot;")
   .replaceAll("'", "&#039;");
 
+const formatLabel = value => String(value)
+  .replaceAll("_", " ")
+  .replace(/\b\w/g, letter => letter.toUpperCase());
+
+const renderValue = value => {
+  if (value === null || value === undefined) return "";
+  if (typeof value === "object") return JSON.stringify(value);
+  return String(value);
+};
+
+const renderFacts = facts => {
+  if (!facts || typeof facts !== "object") return "";
+
+  const rows = Object.entries(facts).map(([key, value]) => `
+    <div class="fact-row">
+      <dt>${escapeHtml(formatLabel(key))}</dt>
+      <dd>${escapeHtml(renderValue(value))}</dd>
+    </div>
+  `).join("");
+
+  return `
+    <section class="knowledge-section">
+      <h3>Facts</h3>
+      <dl class="facts">${rows}</dl>
+    </section>
+  `;
+};
+
+const coreFields = new Set([
+  "id",
+  "number",
+  "name",
+  "attribute",
+  "type",
+  "summary",
+  "facts"
+]);
+
+const renderKnowledgeLists = card => Object.entries(card)
+  .filter(([key, value]) => !coreFields.has(key) && Array.isArray(value))
+  .map(([key, values]) => `
+    <section class="knowledge-section">
+      <h3>${escapeHtml(formatLabel(key))}</h3>
+      <ul class="knowledge-list">
+        ${values.map(value => `<li>${escapeHtml(renderValue(value))}</li>`).join("")}
+      </ul>
+    </section>
+  `).join("");
+
 Promise.all([
   fetch("./data/cards/index.json").then(r => r.json()),
   fetch("./data/attributes.json").then(r => r.json())
@@ -19,6 +68,7 @@ Promise.all([
   document.querySelector("#cards").innerHTML = cards.map(card => {
     const attribute = attributes[card.attribute];
     const manufacturer = card.facts?.manufacturer;
+    const knowledge = `${renderFacts(card.facts)}${renderKnowledgeLists(card)}`;
 
     return `
       <article class="card">
@@ -28,6 +78,10 @@ Promise.all([
         <p class="type">${escapeHtml(card.type)}</p>
         <p class="summary">${escapeHtml(card.summary)}</p>
         ${manufacturer ? `<p class="manufacturer">${escapeHtml(manufacturer)}</p>` : ""}
+        <details class="knowledge">
+          <summary>Knowledge</summary>
+          <div class="knowledge-body">${knowledge}</div>
+        </details>
         <p class="card-id">${escapeHtml(card.id)}</p>
       </article>
     `;
