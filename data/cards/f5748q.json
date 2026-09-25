@@ -16,5 +16,11 @@
     "VoIP",
     "IPv6",
     "Router"
+  ],
+  "relations": [
+    {
+      "relation": "supports",
+      "card": "ipv6"
+    }
   ]
 }
