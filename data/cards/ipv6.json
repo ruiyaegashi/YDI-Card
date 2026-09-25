@@ -1,0 +1,18 @@
+{
+  "id": "ipv6",
+  "number": 3,
+  "name": "IPv6",
+  "attribute": "network",
+  "type": "internet-protocol",
+  "summary": "IPv4の後継として標準化されたInternet Protocol version 6。128ビットのアドレスを使用する。",
+  "facts": {
+    "standard": "RFC 8200 / STD 86",
+    "address_size_bits": 128,
+    "successor_to": "IPv4"
+  },
+  "address_types": [
+    "Unicast",
+    "Anycast",
+    "Multicast"
+  ]
+}
