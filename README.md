@@ -17,10 +17,11 @@ A **Deck** composes Cards for a purpose. A Deck may be shared; private Instance 
 - **Instance** — a private identification of a specific real-world thing.
 - **Deck** — an architecture composed from Cards, optionally bound to Instances in private contexts.
 
-The first two Cards deliberately exercise different kinds of things:
+現在の3枚は、意図的に異なる性質の対象を扱う。
 
-- **#0001 F5748Q** — a concrete product model, classified as **Network**.
-- **#0002 Custom Domain** — an abstract digital resource, classified provisionally as **Naming**.
+- **#0001 F5748Q** — 具体的な製品モデル。Attributeは **Network**。
+- **#0002 Custom Domain** — 抽象的なデジタル資源。Attributeは暫定的に **Naming**。
+- **#0003 IPv6** — 標準化されたネットワークプロトコル。Attributeは **Network**。
 
 ## Repository
 
