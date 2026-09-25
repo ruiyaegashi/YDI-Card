@@ -32,6 +32,7 @@ data/
     index.json
     f5748q.json
     custom-domain.json
+    ipv6.json
 
 docs/
   Card_Design.md
