@@ -33,35 +33,6 @@ const renderFacts = facts => {
   `;
 };
 
-const renderRelations = (relations, cardsById) => {
-  if (!Array.isArray(relations) || relations.length === 0) return "";
-
-  const items = relations.map(item => {
-    const target = cardsById[item.card];
-    const relation = formatLabel(item.relation);
-    const targetLabel = target
-      ? `#${String(target.number).padStart(4, "0")} ${target.name}`
-      : item.card;
-    const targetHref = target ? `#card-${target.id}` : null;
-
-    return `
-      <li>
-        <span class="relation-type">${escapeHtml(relation)}</span>
-        ${targetHref
-          ? `<a href="${escapeHtml(targetHref)}">${escapeHtml(targetLabel)}</a>`
-          : `<span>${escapeHtml(targetLabel)}</span>`}
-      </li>
-    `;
-  }).join("");
-
-  return `
-    <section class="knowledge-section">
-      <h3>Relations</h3>
-      <ul class="knowledge-list">${items}</ul>
-    </section>
-  `;
-};
-
 const coreFields = new Set([
   "id",
   "number",
@@ -69,8 +40,7 @@ const coreFields = new Set([
   "attribute",
   "type",
   "summary",
-  "facts",
-  "relations"
+  "facts"
 ]);
 
 const renderKnowledgeLists = card => Object.entries(card)
@@ -94,17 +64,14 @@ Promise.all([
   const attributes = Object.fromEntries(
     attributeList.map(attribute => [attribute.id, attribute])
   );
-  const cardsById = Object.fromEntries(
-    cards.map(card => [card.id, card])
-  );
 
   document.querySelector("#cards").innerHTML = cards.map(card => {
     const attribute = attributes[card.attribute];
     const manufacturer = card.facts?.manufacturer;
-    const knowledge = `${renderFacts(card.facts)}${renderKnowledgeLists(card)}${renderRelations(card.relations, cardsById)}`;
+    const knowledge = `${renderFacts(card.facts)}${renderKnowledgeLists(card)}`;
 
     return `
-      <article class="card" id="card-${escapeHtml(card.id)}">
+      <article class="card">
         <span class="attribute">${escapeHtml(attribute?.name ?? card.attribute)}</span>
         <span class="card-number">#${String(card.number).padStart(4, "0")}</span>
         <h2>${escapeHtml(card.name)}</h2>

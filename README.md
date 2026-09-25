@@ -63,21 +63,6 @@ summary
 
 Thing-specific knowledge is allowed to differ. For example, a product may have a manufacturer and capabilities, while a Custom Domain may instead have uses and DNS-related facts.
 
-When one Card has a semantic relationship to another existing Card, it may use an optional `relations` array.
-
-```json
-"relations": [
-  {
-    "relation": "supports",
-    "card": "ipv6"
-  }
-]
-```
-
-A relation stores the meaning of the relationship and the target Card ID. URLs, anchors, labels, and other presentation details belong to the consuming application, not the canonical Card data.
-
-The first real relation is **F5748Q supports IPv6**. Relation types are allowed to grow from real examples rather than from a complete graph schema designed in advance.
-
 Presentation concepts such as front, back, flip animation, and layout are intentionally not part of the canonical data model.
 
 **Data knows meaning. Apps know presentation.**
