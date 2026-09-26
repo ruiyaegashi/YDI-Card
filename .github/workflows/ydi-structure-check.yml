@@ -13,6 +13,6 @@ permissions:
 
 jobs:
   check:
-    uses: ruiyaegashi/YDI/.github/workflows/ydi-structure-check.yml@main
+    uses: ruiyaegashi/YDI-Shared/.github/workflows/ydi-structure-check.yml@main
     with:
       kind: service
